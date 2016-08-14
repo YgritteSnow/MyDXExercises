@@ -40,6 +40,9 @@
     <Filter Include="Source Files\game\updater">
       <UniqueIdentifier>{a9988755-9577-4aa1-857e-4059a9ea9b53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\renderer">
+      <UniqueIdentifier>{d6af5b30-86fa-491f-b771-0adf839cbb3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\device\device_utility.cpp">
@@ -51,14 +54,14 @@
     <ClCompile Include="main_loop.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="model\model_manager.cpp">
-      <Filter>Source Files\model\private</Filter>
-    </ClCompile>
     <ClCompile Include="lib\event\event_manager.cpp">
       <Filter>Source Files\game\event</Filter>
     </ClCompile>
     <ClCompile Include="game\updater\updater.cpp">
       <Filter>Source Files\game\updater</Filter>
+    </ClCompile>
+    <ClCompile Include="model\model_manager.cpp">
+      <Filter>Source Files\model\public</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="game\updater\updater.h">
       <Filter>Source Files\game\updater</Filter>
+    </ClInclude>
+    <ClInclude Include="game\renderer\renderer.h">
+      <Filter>Source Files\game\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
