@@ -10,6 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game\updater\updater.cpp" />
+    <ClCompile Include="lib\config\config.cpp" />
+    <ClCompile Include="lib\device\device_utility.cpp" />
+    <ClCompile Include="lib\event\event_manager.cpp" />
+    <ClCompile Include="main_loop.cpp" />
+    <ClCompile Include="model\model_manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game\updater\updater.h" />
+    <ClInclude Include="lib\config\config.h" />
+    <ClInclude Include="lib\device\device_utility.h" />
+    <ClInclude Include="lib\event\event_manager.h" />
+    <ClInclude Include="model\model_manager.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9865C22-02CC-4915-B787-DDFAC1C622F7}</ProjectGuid>
     <RootNamespace>MyDxExercises</RootNamespace>
@@ -36,7 +51,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\j\Documents\Git Projects\MyDXExercises\MyDxExercises;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -59,8 +76,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
