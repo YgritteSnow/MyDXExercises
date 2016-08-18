@@ -53,7 +53,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\j\Documents\Git Projects\MyDXExercises\MyDxExercises;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\j\Documents\Git Projects\MyDXExercises\MyDxExercises;F:\MyProjects\MyDXExercises\MyDxExercises;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
