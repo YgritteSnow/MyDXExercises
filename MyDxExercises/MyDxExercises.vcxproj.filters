@@ -13,69 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\lib">
-      <UniqueIdentifier>{03a7f054-2e3e-4b51-8a3f-14d56c886a58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\lib\config">
-      <UniqueIdentifier>{a676e922-67fe-4901-bc20-2ac6967504b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game">
-      <UniqueIdentifier>{054ec4e0-ced8-45ad-8a0c-fc005c1038bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\model">
-      <UniqueIdentifier>{e8271b9f-69b3-402c-a275-641f2d615479}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\model\public">
-      <UniqueIdentifier>{05f2d2a6-41b4-48e6-a339-85a4edb0ec4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\model\private">
-      <UniqueIdentifier>{9c5c6253-99dd-4a40-8932-8a3fb70d0330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\device">
-      <UniqueIdentifier>{561b68a0-fa5e-43ba-ac78-8dd3e89a1cfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\event">
-      <UniqueIdentifier>{497f4ffe-6e9d-43d0-8052-6e81dc94b2ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\updater">
-      <UniqueIdentifier>{a9988755-9577-4aa1-857e-4059a9ea9b53}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lib\device\device_utility.cpp">
-      <Filter>Source Files\game\device</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\config\config.cpp">
-      <Filter>Source Files\lib\config</Filter>
-    </ClCompile>
-    <ClCompile Include="main_loop.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\event\event_manager.cpp">
-      <Filter>Source Files\game\event</Filter>
-    </ClCompile>
-    <ClCompile Include="game\updater\updater.cpp">
-      <Filter>Source Files\game\updater</Filter>
-    </ClCompile>
-    <ClCompile Include="model\model_manager.cpp">
-      <Filter>Source Files\model\public</Filter>
+    <ClCompile Include="model_2d.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\device\device_utility.h">
-      <Filter>Source Files\game\device</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\config\config.h">
-      <Filter>Source Files\lib\config</Filter>
-    </ClInclude>
-    <ClInclude Include="model\model_manager.h">
-      <Filter>Source Files\model\public</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\event\event_manager.h">
-      <Filter>Source Files\game\event</Filter>
-    </ClInclude>
-    <ClInclude Include="game\updater\updater.h">
-      <Filter>Source Files\game\updater</Filter>
+    <ClInclude Include="model_2d.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

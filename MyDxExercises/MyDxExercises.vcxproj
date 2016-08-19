@@ -11,19 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game\updater\updater.cpp" />
-    <ClCompile Include="lib\config\config.cpp" />
-    <ClCompile Include="lib\device\device_utility.cpp" />
-    <ClCompile Include="lib\event\event_manager.cpp" />
-    <ClCompile Include="main_loop.cpp" />
-    <ClCompile Include="model\model_manager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="model_2d.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game\updater\updater.h" />
-    <ClInclude Include="lib\config\config.h" />
-    <ClInclude Include="lib\device\device_utility.h" />
-    <ClInclude Include="lib\event\event_manager.h" />
-    <ClInclude Include="model\model_manager.h" />
+    <ClInclude Include="model_2d.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9865C22-02CC-4915-B787-DDFAC1C622F7}</ProjectGuid>
@@ -52,7 +44,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\j\Documents\Git Projects\MyDXExercises\MyDxExercises;F:\MyProjects\MyDXExercises\MyDxExercises;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\j\Documents\Git Projects\MyDXExercises\MyDxExercises;F:\MyProjects\MyDXExercises\MyDxExercises;$(WindowsSdkDir)Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(WindowsSdkDir)Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
