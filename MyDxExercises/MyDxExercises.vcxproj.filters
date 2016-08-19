@@ -21,6 +21,18 @@
     <ClCompile Include="model_2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse_handle_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model_3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -29,11 +41,29 @@
     <ClInclude Include="model_2d.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="model_interface.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model_manager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camera_manager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse_handle_manager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model_3d.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="model.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="model_interface.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="utility.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

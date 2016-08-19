@@ -11,14 +11,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="camera_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
+    <ClCompile Include="model_3d.cpp" />
     <ClCompile Include="model_2d.cpp" />
+    <ClCompile Include="mouse_handle_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="camera_manager.h" />
     <ClInclude Include="model.h" />
+    <ClInclude Include="model_3d.h" />
     <ClInclude Include="model_2d.h" />
     <ClInclude Include="model_interface.h" />
+    <ClInclude Include="model_manager.h" />
+    <ClInclude Include="mouse_handle_manager.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9865C22-02CC-4915-B787-DDFAC1C622F7}</ProjectGuid>
@@ -28,7 +38,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfAtl>false</UseOfAtl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

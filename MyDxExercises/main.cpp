@@ -3,8 +3,9 @@
 #include <tchar.h>
 #include <vector>
 
-#include "model_2d.h"
-#include "model.h"
+#include "model_manager.h"
+#include "camera_manager.h"
+#include "mouse_handle_manager.h"
 
 LPDIRECT3D9 g_d3d = NULL;
 LPDIRECT3DDEVICE9 g_d3ddevice = NULL;
@@ -90,10 +91,15 @@ LRESULT CALLBACK MyWndProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
 				return 0;
 
 			default:
-				DestroyWindow( hwnd );
+				MouseHandeManager::GetMouseHandleManager()->OnKeyDown(wParam);
 				return DefWindowProc( hwnd, msg, wParam, lParam );
 			}
 		}
+		return 0;
+
+	case WM_MOUSEMOVE:
+		MouseHandeManager::GetMouseHandleManager()->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+		return 0;
 
 	default:
 		return DefWindowProc( hwnd, msg, wParam, lParam );
@@ -149,22 +155,14 @@ void Clear()
 	}
 }
 
-static std::vector<ModelInterface*> s_vec_models;
-
 void InitModels()
 {
-	Model2D* m = new Model2D;
-	if( m->LoadToRam() && m->LoadToBuffer() )
-		s_vec_models.push_back(m);
-
-	ModelInterface* m2 = new Model3D;
-	if( m2->LoadToRam() && m2->LoadToBuffer() )
-		s_vec_models.push_back(m2);
+	ModelManager::GetModelManager()->InitModels();
+	CameraManager::GetCameraManager()->InitCamera();
+	MouseHandeManager::GetMouseHandleManager()->RegisterMouseHandlerObject(CameraManager::GetCameraManager()->QueryMouseHandler());
 }
+
 void RenderModels()
 {
-	for(auto it = s_vec_models.begin(); it != s_vec_models.end(); ++it )
-	{
-		(*it)->Render();
-	}
+	ModelManager::GetModelManager()->RenderModels();
 }
