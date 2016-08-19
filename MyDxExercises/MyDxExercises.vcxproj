@@ -19,7 +19,6 @@
     <ClCompile Include="model\model_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game\renderer\renderer.h" />
     <ClInclude Include="game\updater\updater.h" />
     <ClInclude Include="lib\config\config.h" />
     <ClInclude Include="lib\device\device_utility.h" />
