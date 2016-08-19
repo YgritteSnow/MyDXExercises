@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "model_2d.h"
+#include "model.h"
 
 LPDIRECT3D9 g_d3d = NULL;
 LPDIRECT3DDEVICE9 g_d3ddevice = NULL;
@@ -148,13 +149,17 @@ void Clear()
 	}
 }
 
-static std::vector<Model2D*> s_vec_models;
+static std::vector<ModelInterface*> s_vec_models;
 
 void InitModels()
 {
 	Model2D* m = new Model2D;
 	if( m->LoadToRam() && m->LoadToBuffer() )
 		s_vec_models.push_back(m);
+
+	ModelInterface* m2 = new Model3D;
+	if( m2->LoadToRam() && m2->LoadToBuffer() )
+		s_vec_models.push_back(m2);
 }
 void RenderModels()
 {

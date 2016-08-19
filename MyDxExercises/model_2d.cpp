@@ -12,15 +12,14 @@ Model2D::Model2D()
 
 Model2D::~Model2D()
 {
-	UnloadFromBuffer();
 	UnloadFromRam();
 }
 
 void Model2D::Render()
 {
 	g_d3ddevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	g_d3ddevice->SetStreamSource(0, m_vbuffer, 0, sizeof(Model2DVertex));
-	g_d3ddevice->SetFVF(Model2DVertexFVF);
+	g_d3ddevice->SetStreamSource(0, m_vbuffer, 0, sizeof(VertexStruct));
+	g_d3ddevice->SetFVF(VertexFVF);
 	g_d3ddevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, vertex_length / 3 );
 }
 
@@ -28,8 +27,8 @@ bool Model2D::LoadToRam()
 {
 	UnloadFromRam();
 	
-	m_arr_vertex = new Model2DVertex[vertex_length];
-	ZeroMemory( m_arr_vertex, sizeof(Model2DVertex) * vertex_length );
+	m_arr_vertex = new VertexStruct[vertex_length];
+	ZeroMemory( m_arr_vertex, sizeof(VertexStruct) * vertex_length );
 
 	for( int i = 0; i < vertex_length; ++i )
 	{
@@ -48,6 +47,8 @@ bool Model2D::LoadToRam()
 
 void Model2D::UnloadFromRam()
 {
+	UnloadFromBuffer();
+
 	if( m_arr_vertex )
 	{
 		delete[] m_arr_vertex;
@@ -57,14 +58,14 @@ void Model2D::UnloadFromRam()
 
 bool Model2D::LoadToBuffer()
 {
-	if( FAILED(g_d3ddevice->CreateVertexBuffer(sizeof(Model2DVertex) * vertex_length, 0, Model2DVertexFVF, D3DPOOL_DEFAULT, &m_vbuffer, NULL)) )
+	if( FAILED(g_d3ddevice->CreateVertexBuffer(sizeof(VertexStruct) * vertex_length, 0, VertexFVF, D3DPOOL_DEFAULT, &m_vbuffer, NULL)) )
 		return false;
 
 	VOID* pData;
-	if( FAILED(m_vbuffer->Lock(0, sizeof(Model2DVertex) * vertex_length, &pData, 0)) )
+	if( FAILED(m_vbuffer->Lock(0, sizeof(VertexStruct) * vertex_length, &pData, 0)) )
 		return false;
 
-	memcpy(pData, m_arr_vertex, sizeof(Model2DVertex) * vertex_length);
+	memcpy(pData, m_arr_vertex, sizeof(VertexStruct) * vertex_length);
 	m_vbuffer->Unlock();
 
 	return true;

@@ -7,35 +7,36 @@
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
 
+#include "model_interface.h"
+
 extern LPDIRECT3DDEVICE9 g_d3ddevice;
 extern const int g_screen_width;
 extern const int g_screen_height;
 
-struct Model2DVertex
-{
-	float x, y, z, rhw;
-	DWORD color;
-};
-
-class Model2D
+class Model2D : public ModelInterface
 {
 public:
 	Model2D();
 	~Model2D();
 
 public:
-	void Render();
+	virtual void Render();
 
-	bool LoadToRam();
-	void UnloadFromRam();
+	virtual bool LoadToRam();
+	virtual void UnloadFromRam();
 
-	bool LoadToBuffer();
-	void UnloadFromBuffer();
+	virtual bool LoadToBuffer();
+	virtual void UnloadFromBuffer();
 
 private:
-	static const DWORD Model2DVertexFVF = D3DFVF_XYZRHW | D3DFVF_DIFFUSE;
+	struct VertexStruct
+	{
+		float x, y, z, rhw;
+		DWORD color;
+	};
+	static const DWORD VertexFVF = D3DFVF_XYZRHW | D3DFVF_DIFFUSE;
 
-	Model2DVertex* m_arr_vertex;
+	VertexStruct* m_arr_vertex;
 	LPDIRECT3DVERTEXBUFFER9 m_vbuffer;
 	LPDIRECT3DINDEXBUFFER9 m_ibuffer;
 };
