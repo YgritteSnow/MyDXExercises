@@ -13,15 +13,28 @@ Model3D::Model3D()
 
 Model3D::~Model3D()
 {
+	UnloadFromBuffer();
 	UnloadFromRam();
 }
 
 void Model3D::Render()
 {
+	if( m_shader.IsValid() )
+	{
+		Render_byShader();
+	}
+	else
+	{
+		Render_byMesh();
+	}
+}
+
+void Model3D::Render_byMesh()
+{
 	g_d3ddevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 	// Turn on the zbuffer
-	//g_d3ddevice->SetRenderState( D3DRS_ZENABLE, TRUE );
+	g_d3ddevice->SetRenderState( D3DRS_ZENABLE, TRUE );
 
 	// Turn on ambient lighting 
 	g_d3ddevice->SetRenderState( D3DRS_AMBIENT, 0xffffffff );
@@ -34,14 +47,30 @@ void Model3D::Render()
 	}
 }
 
+void Model3D::Render_byShader()
+{
+
+}
+
 bool Model3D::LoadToRam()
 {
 	UnloadFromBuffer();
+	UnloadFromRam();
+
+	m_shader.UnloadFromBuffer();
+	m_shader.UnloadFromBuffer();
 
 	return true;
 }
 
 bool Model3D::LoadToBuffer()
+{
+	m_shader.LoadToBuffer(); // 如果shader加载失败的话就不使用shader
+
+	return LoadToBuffer_mesh();
+}
+
+bool Model3D::LoadToBuffer_mesh()
 {
 	LPD3DXBUFFER t_mtlbuffer;
 	if( FAILED( D3DXLoadMeshFromX(_T("tiger.x"), D3DXMESH_SYSTEMMEM, g_d3ddevice, NULL, &t_mtlbuffer, NULL, &m_mtlCount, &m_mesh )) )
@@ -68,8 +97,6 @@ bool Model3D::LoadToBuffer()
 
 void Model3D::UnloadFromRam()
 {
-	UnloadFromBuffer();
-
 	if( m_arr_mtl )
 	{
 		delete[] m_arr_mtl;
@@ -93,4 +120,5 @@ void Model3D::UnloadFromBuffer()
 			m_arr_pTex[i] = NULL;
 		}
 	}
+	m_shader.UnloadFromBuffer();
 }

@@ -27,10 +27,18 @@ public:
 	virtual void UnloadFromBuffer();
 
 private:
+	bool LoadToBuffer_mesh();
+
+	void Render_byShader();
+	void Render_byMesh();
+
+private:
 	DWORD m_mtlCount;
 	LPD3DXMESH m_mesh;
 	D3DMATERIAL9* m_arr_mtl;
 	LPDIRECT3DTEXTURE9* m_arr_pTex;
+	
+	Shader m_shader;
 };
 
 #endif

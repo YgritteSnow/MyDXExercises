@@ -12,6 +12,7 @@ Model2D::Model2D()
 
 Model2D::~Model2D()
 {
+	UnloadFromBuffer();
 	UnloadFromRam();
 }
 
@@ -25,6 +26,7 @@ void Model2D::Render()
 
 bool Model2D::LoadToRam()
 {
+	UnloadFromBuffer();
 	UnloadFromRam();
 	
 	m_arr_vertex = new VertexStruct[vertex_length];
@@ -47,8 +49,6 @@ bool Model2D::LoadToRam()
 
 void Model2D::UnloadFromRam()
 {
-	UnloadFromBuffer();
-
 	if( m_arr_vertex )
 	{
 		delete[] m_arr_vertex;

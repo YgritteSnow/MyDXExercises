@@ -18,6 +18,7 @@
     <ClCompile Include="model_3d.cpp" />
     <ClCompile Include="model_2d.cpp" />
     <ClCompile Include="mouse_handle_manager.cpp" />
+    <ClCompile Include="shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="model_interface.h" />
     <ClInclude Include="model_manager.h" />
     <ClInclude Include="mouse_handle_manager.h" />
+    <ClInclude Include="shader.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
