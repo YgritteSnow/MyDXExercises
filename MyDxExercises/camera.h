@@ -38,4 +38,4 @@ private:
 	D3DXMATRIX m_mat_camera;
 };
 
-#endif
+#endif 

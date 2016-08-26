@@ -4,7 +4,7 @@
 class ModelInterface
 {
 public:
-	virtual void Render() = 0;
+	virtual void Render() const = 0;
 
 	virtual bool LoadToRam() = 0;
 	virtual void UnloadFromRam() = 0;
@@ -12,4 +12,4 @@ public:
 	virtual bool LoadToBuffer() = 0;
 	virtual void UnloadFromBuffer() = 0;
 };
-#endif
+#endif 

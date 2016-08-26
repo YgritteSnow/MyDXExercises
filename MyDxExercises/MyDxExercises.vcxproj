@@ -13,24 +13,30 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="camera_manager.cpp" />
+    <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="model_3d.cpp" />
     <ClCompile Include="model_2d.cpp" />
     <ClCompile Include="mouse_handle_manager.cpp" />
-    <ClCompile Include="shader.cpp" />
+    <ClCompile Include="effect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="camera_manager.h" />
+    <ClInclude Include="log.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="model_3d.h" />
     <ClInclude Include="model_2d.h" />
     <ClInclude Include="model_interface.h" />
     <ClInclude Include="model_manager.h" />
     <ClInclude Include="mouse_handle_manager.h" />
-    <ClInclude Include="shader.h" />
+    <ClInclude Include="effect.h" />
     <ClInclude Include="utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="jj_test.fx" />
+    <None Include="Silhoutte.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9865C22-02CC-4915-B787-DDFAC1C622F7}</ProjectGuid>

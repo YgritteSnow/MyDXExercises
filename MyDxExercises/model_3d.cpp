@@ -17,28 +17,8 @@ Model3D::~Model3D()
 	UnloadFromRam();
 }
 
-void Model3D::Render()
+void Model3D::Render() const
 {
-	if( m_shader.IsValid() )
-	{
-		Render_byShader();
-	}
-	else
-	{
-		Render_byMesh();
-	}
-}
-
-void Model3D::Render_byMesh()
-{
-	g_d3ddevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-
-	// Turn on the zbuffer
-	g_d3ddevice->SetRenderState( D3DRS_ZENABLE, TRUE );
-
-	// Turn on ambient lighting 
-	g_d3ddevice->SetRenderState( D3DRS_AMBIENT, 0xffffffff );
-
 	for( DWORD i = 0; i < m_mtlCount; ++i )
 	{
 		g_d3ddevice->SetMaterial(&m_arr_mtl[i]);
@@ -47,9 +27,9 @@ void Model3D::Render_byMesh()
 	}
 }
 
-void Model3D::Render_byShader()
+void Model3D::RenderSubset(DWORD subset) const 
 {
-
+	m_mesh->DrawSubset(subset);
 }
 
 bool Model3D::LoadToRam()
@@ -57,20 +37,10 @@ bool Model3D::LoadToRam()
 	UnloadFromBuffer();
 	UnloadFromRam();
 
-	m_shader.UnloadFromBuffer();
-	m_shader.UnloadFromBuffer();
-
 	return true;
 }
 
 bool Model3D::LoadToBuffer()
-{
-	m_shader.LoadToBuffer(); // 如果shader加载失败的话就不使用shader
-
-	return LoadToBuffer_mesh();
-}
-
-bool Model3D::LoadToBuffer_mesh()
 {
 	LPD3DXBUFFER t_mtlbuffer;
 	if( FAILED( D3DXLoadMeshFromX(_T("tiger.x"), D3DXMESH_SYSTEMMEM, g_d3ddevice, NULL, &t_mtlbuffer, NULL, &m_mtlCount, &m_mesh )) )
@@ -91,6 +61,48 @@ bool Model3D::LoadToBuffer_mesh()
 		}
 	}
 	t_mtlbuffer->Release();
+
+	return true;
+}
+
+bool Model3D::SetVertexDecl( D3DVERTEXELEMENT9* pElements, UINT eleCount )
+{
+	LPD3DXMESH pTempMesh = NULL;
+	m_mesh->CloneMesh(m_mesh->GetOptions(), pElements, g_d3ddevice, &pTempMesh);
+	if( !pTempMesh )
+	{
+		UnloadFromBuffer();
+		return false;
+	}
+
+	D3DVERTEXELEMENT9 pOldDeclElements[MAX_FVF_DECL_SIZE];
+
+	m_mesh->GetDeclaration(pOldDeclElements);
+	bool bHadNormal = false;
+	for( UINT idx = 0; idx < D3DXGetDeclLength(pOldDeclElements); ++idx )
+	{
+		if( pOldDeclElements[idx].Usage == D3DDECLUSAGE_NORMAL )
+		{
+			bHadNormal = true;
+		}
+	}
+
+	m_mesh->Release();
+	m_mesh = pTempMesh;
+
+	bool bHaveNormal = false;
+	for( UINT idx = 0; idx < eleCount; ++idx )
+	{
+		if( pElements[idx].Usage == D3DDECLUSAGE_NORMAL )
+		{
+			bHaveNormal = true;
+		}
+	}
+
+	if( !bHadNormal && bHaveNormal )
+	{
+		D3DXComputeNormals( m_mesh, NULL );
+	}
 
 	return true;
 }
@@ -120,5 +132,4 @@ void Model3D::UnloadFromBuffer()
 			m_arr_pTex[i] = NULL;
 		}
 	}
-	m_shader.UnloadFromBuffer();
 }

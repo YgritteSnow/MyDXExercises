@@ -41,7 +41,7 @@ bool CameraManager::OnKeyDown(WPARAM wParam)
 
 bool CameraManager::OnKeyMove(float x_screen, float y_screen)
 {
-	m_camera->RotateXYZ(x_screen, 0, y_screen);
+	m_camera->RotateXYZ(x_screen, y_screen, 0);
 	return true;
 }
 
@@ -50,11 +50,28 @@ void CameraManager::Reset()
 	m_camera->Reset();
 }
 
-const D3DXMATRIX& CameraManager::GetProjMatrix()
+const D3DXMATRIX CameraManager::GetProjMatrix() const
 {
 	return m_camera->GetProjMatrix();
 }
-const D3DXMATRIX CameraManager::GetViewMatrix()
+const D3DXMATRIX CameraManager::GetViewMatrix() const
 {
+	D3DXMATRIX res;
+	D3DXMatrixInverse(&res, NULL, &m_camera->GetViewMatrix());
 	return m_camera->GetViewMatrix();
+}
+const D3DXMATRIX CameraManager::GetViewProjMatrix() const
+{
+	D3DXMATRIX res;
+	D3DXMatrixMultiply( &res, &GetViewMatrix(), &GetProjMatrix() );
+	res = GetViewMatrix() * GetProjMatrix();
+	return res;
+}
+const D3DXMATRIX CameraManager::GetWorldViewProjMatrix(const D3DXMATRIX* worldTransform) const
+{
+	D3DXMATRIX res;
+	D3DXMatrixMultiply( &res, &GetViewMatrix(), &GetProjMatrix() );
+	D3DXMatrixMultiply( &res, worldTransform, &res );
+	res = *worldTransform * GetViewMatrix() * GetProjMatrix();
+	return res;
 }

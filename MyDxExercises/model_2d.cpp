@@ -16,7 +16,7 @@ Model2D::~Model2D()
 	UnloadFromRam();
 }
 
-void Model2D::Render()
+void Model2D::Render() const
 {
 	g_d3ddevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	g_d3ddevice->SetStreamSource(0, m_vbuffer, 0, sizeof(VertexStruct));

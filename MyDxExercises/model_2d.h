@@ -1,8 +1,8 @@
+#ifndef __MODEL_2D_H__
+#define __MODEL_2D_H__
 /************************************************************************/
 /* 使用 rhw 参数，来做2d的模型。或许可以用作界面~                                                                     */
 /************************************************************************/
-#ifndef __MODEL_2D__
-#define __MODEL_2D__
 
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
@@ -20,7 +20,7 @@ public:
 	~Model2D();
 
 public:
-	virtual void Render();
+	virtual void Render() const;
 
 	virtual bool LoadToRam();
 	virtual void UnloadFromRam();
@@ -41,4 +41,4 @@ private:
 	LPDIRECT3DINDEXBUFFER9 m_ibuffer;
 };
 
-#endif
+#endif 

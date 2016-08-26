@@ -22,11 +22,13 @@ public:
 	virtual bool OnKeyDown(WPARAM wParam);
 	virtual bool OnKeyMove(float x_screen, float y_screen);
 
-protected:
-	const D3DXMATRIX& GetProjMatrix();
-	const D3DXMATRIX GetViewMatrix();
+public:
+	const D3DXMATRIX GetProjMatrix() const;
+	const D3DXMATRIX GetViewMatrix() const;
+	const D3DXMATRIX GetViewProjMatrix() const;
+	const D3DXMATRIX GetWorldViewProjMatrix(const D3DXMATRIX* worldTransform) const;
 
 private:
 	Camera* m_camera;
 };
-#endif
+#endif 

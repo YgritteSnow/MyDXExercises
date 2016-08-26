@@ -2,6 +2,9 @@
 #define __MODEL_H__
 
 #include "model_3d.h"
+#include "log.h"
+
+class Effect;
 
 class Model : public ModelInterface
 {
@@ -10,7 +13,8 @@ public:
 	~Model();
 
 	// model ฯเนุ
-	virtual void Render();
+	virtual void Render() const;
+
 	virtual bool LoadToRam();
 	virtual void UnloadFromRam();
 	virtual bool LoadToBuffer();
@@ -20,7 +24,11 @@ public:
 	void Reset();
 
 private:
+	void RenderByEffect() const;
+
+private:
 	Model3D* m_model;
 	D3DXMATRIX m_worldTrans;
+	Effect* m_effect;
 };
-#endif
+#endif 

@@ -1,5 +1,5 @@
-#ifndef __MOUSE_HANDLER_H__
-#define __MOUSE_HANDLER_H__
+#ifndef __MOUSE_HANDLE_MANAGER_H__
+#define __MOUSE_HANDLE_MANAGER_H__
 
 #include <vector>
 #include <d3d9.h>
@@ -37,4 +37,4 @@ private:
 
 	bool m_is_inited;
 };
-#endif
+#endif 

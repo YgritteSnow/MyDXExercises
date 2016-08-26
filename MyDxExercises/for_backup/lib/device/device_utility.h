@@ -1,5 +1,5 @@
-#ifndef __LIB_DEVICE_DEVICE_UTILITY_H__
-#define __LIB_DEVICE_DEVICE_UTILITY_H__
+#ifndef __FOR_BACKUP_LIB_DEVICE_DEVICE_UTILITY_H__
+#define __FOR_BACKUP_LIB_DEVICE_DEVICE_UTILITY_H__
 #include <Windows.h>
 namespace N_DeviceUtility
 {

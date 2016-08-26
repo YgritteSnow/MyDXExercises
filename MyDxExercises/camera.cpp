@@ -40,7 +40,7 @@ void Camera::RotateXYZ(float angle_x, float angle_y, float angle_z) // ÈÆ×ÅxyzÒÆ
 {
 	D3DXMATRIX rotMat;
 	D3DXMatrixRotationYawPitchRoll(&rotMat, angle_x, angle_y, angle_z);
-	D3DXMatrixMultiply(&m_mat_camera, &rotMat, &m_mat_camera);
+	D3DXMatrixMultiply(&m_mat_camera, &m_mat_camera, &rotMat);
 
 	RefreshViewTransform();
 }

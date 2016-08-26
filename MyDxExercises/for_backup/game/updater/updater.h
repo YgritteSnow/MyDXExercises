@@ -1,4 +1,5 @@
-
+#ifndef __FOR_BACKUP_GAME_UPDATER_UPDATER_H__
+#define __FOR_BACKUP_GAME_UPDATER_UPDATER_H__
 class I_Updater
 {
 public:
@@ -18,3 +19,4 @@ private:
 private:
 	unsigned m_u_time;
 };
+#endif 
