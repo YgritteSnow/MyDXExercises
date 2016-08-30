@@ -32,6 +32,7 @@ public:
 	HRESULT SetMatrix(D3DXHANDLE handle, const D3DXMATRIX* mat );
 	HRESULT SetTechnique(D3DXHANDLE handle);
 	HRESULT SetTexture(D3DXHANDLE handle, LPDIRECT3DBASETEXTURE9 pTex);
+	HRESULT SetFloat(D3DXHANDLE handle, float f);
 	HRESULT Begin(UINT* pass, DWORD flags);
 	HRESULT End();
 	HRESULT BeginPass(UINT pass);

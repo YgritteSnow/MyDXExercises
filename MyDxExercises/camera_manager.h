@@ -19,8 +19,9 @@ public:
 	void InitCamera();
 	void Reset();
 
-	virtual bool OnKeyDown(WPARAM wParam);
-	virtual bool OnKeyMove(float x_screen, float y_screen);
+	virtual bool OnMouseMove(float x_screen, float y_screen);
+	virtual bool OnSpaceKeyDown(bool isDown);
+	virtual bool OnArrowKeyDown(bool isDown, D3DXVECTOR3 direct);
 
 public:
 	const D3DXMATRIX GetProjMatrix() const;

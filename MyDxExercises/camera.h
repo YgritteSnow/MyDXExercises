@@ -25,6 +25,7 @@ public:
 	void MoveY(float dist); // 沿着y轴移动
 	void MoveZ(float dist); // 沿着z轴移动
 	void MoveXYZ(float dist_x, float dist_y, float dist_z); // 沿着xyz移动
+	void MoveXYZ(D3DXVECTOR3 deltaPos); // 沿着xyz移动
 	void MoveToPos(D3DXVECTOR3 pos); // 移动到新的位置
 
 	void Reset(); // 重置为默认值

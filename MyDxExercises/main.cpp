@@ -6,12 +6,14 @@
 #include "model_manager.h"
 #include "camera_manager.h"
 #include "mouse_handle_manager.h"
+//#include "log.h"
 
 LPDIRECT3D9 g_d3d = NULL;
 LPDIRECT3DDEVICE9 g_d3ddevice = NULL;
 
 const int g_screen_width = 400;
 const int g_screen_height = 500;
+const float g_key_sensitivity = 0.1f;
 
 LRESULT InitD3D( HWND hwnd );
 void Render();
@@ -91,14 +93,25 @@ LRESULT CALLBACK MyWndProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
 				return 0;
 
 			default:
-				MouseHandeManager::GetMouseHandleManager()->OnKeyDown(wParam);
+				MouseHandleManager::GetMouseHandleManager()->OnKeyDown(wParam);
 				return DefWindowProc( hwnd, msg, wParam, lParam );
 			}
 		}
 		return 0;
 
+	case WM_MOUSEWHEEL:
+		MouseHandleManager::GetMouseHandleManager()->OnWheelMove(static_cast<short>(HIWORD(wParam)));
+		return 0;
+
 	case WM_MOUSEMOVE:
-		MouseHandeManager::GetMouseHandleManager()->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+		MouseHandleManager::GetMouseHandleManager()->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+		return 0;
+
+	case WM_LBUTTONDOWN:
+		MouseHandleManager::GetMouseHandleManager()->OnLeftMousePress(true, LOWORD(lParam), HIWORD(lParam));
+		return 0;
+	case WM_LBUTTONUP:
+		MouseHandleManager::GetMouseHandleManager()->OnLeftMousePress(false, LOWORD(lParam), HIWORD(lParam));
 		return 0;
 
 	default:
@@ -159,7 +172,7 @@ void InitModels()
 {
 	ModelManager::GetModelManager()->InitModels();
 	CameraManager::GetCameraManager()->InitCamera();
-	MouseHandeManager::GetMouseHandleManager()->RegisterMouseHandlerObject(CameraManager::GetCameraManager()->QueryMouseHandler());
+	MouseHandleManager::GetMouseHandleManager()->RegisterObject(CameraManager::GetCameraManager()->QueryMouseHandler());
 }
 
 void RenderModels()

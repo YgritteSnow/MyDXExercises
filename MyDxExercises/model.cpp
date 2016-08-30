@@ -48,6 +48,7 @@ void Model::RenderByEffect() const
 	HR_RETURN( m_effect->SetMatrix("ProjTransform", &(CameraManager::GetCameraManager()->GetProjMatrix())) );
 	HR_RETURN( m_effect->SetMatrix("ViewProjTransform", &(CameraManager::GetCameraManager()->GetViewProjMatrix())) );
 	HR_RETURN( m_effect->SetMatrix("WorldViewProjTransform", &(CameraManager::GetCameraManager()->GetWorldViewProjMatrix(&m_worldTrans))) );
+	HR_RETURN( m_effect->SetFloat("CurrentTime", TimerManager::GetTimerManager()->GetCurTime()));
 
 	HR_RETURN( m_effect->SetTechnique("Default") );
 	UINT passCount = 0;

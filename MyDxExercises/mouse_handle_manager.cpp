@@ -1,74 +1,136 @@
 #include "mouse_handle_manager.h"
 #include <tchar.h>
 
-MouseHandeManager::MouseHandeManager()
+
+MouseHandleManager::MouseHandleManager()
 	: m_last_mousepos_x(0)
 	, m_last_mousepos_y(0)
 	, m_is_inited(false)
+	, m_is_left_mouse_down(false)
 {
 
 }
 
-MouseHandeManager::~MouseHandeManager()
+MouseHandleManager::~MouseHandleManager()
 {
 
 }
 
-MouseHandeManager* MouseHandeManager::GetMouseHandleManager()
+MouseHandleManager* MouseHandleManager::GetMouseHandleManager()
 {
-	static MouseHandeManager t_mouseHandleManager;
+	static MouseHandleManager t_mouseHandleManager;
 	return &t_mouseHandleManager;
 }
 
-void MouseHandeManager::RegisterMouseHandlerObject(MouseHandlerObject* handler)
+/************************************************************************/
+/* 从主循环接收消息                                                                     */
+/************************************************************************/
+
+void MouseHandleManager::OnKeyDown(WPARAM wParam)
 {
-	for(auto it = m_vec_handlerObject.begin(); it != m_vec_handlerObject.end(); ++it )
+	switch( wParam )
 	{
-		if( *it == handler )
-		{
-			return;
-		}
+	case VK_ESCAPE:
+		OnEscapeKeyDown(true);
+		break;
+	case VK_SPACE:
+		OnSpaceKeyDown(true);
+		break;
+	case VK_LEFT:
+	case 'A':
+		OnArrowKeyDown(true, D3DXVECTOR3(-g_key_sensitivity, 0, 0));
+		break;
+	case VK_RIGHT:
+	case 'D':
+		OnArrowKeyDown(true, D3DXVECTOR3(g_key_sensitivity, 0, 0));
+		break;
+	case VK_UP:
+	case 'W':
+		OnArrowKeyDown(true, D3DXVECTOR3(0, g_key_sensitivity, 0));
+		break;
+	case VK_DOWN:
+	case 'S':
+		OnArrowKeyDown(true, D3DXVECTOR3(0, -g_key_sensitivity, 0));
+		break;
 	}
-	m_vec_handlerObject.push_back(handler);
 }
 
-void MouseHandeManager::UnRegisterMouseHandlerObject(MouseHandlerObject* handler)
+void MouseHandleManager::OnWheelMove(int deltaMove)
 {
-	for(auto it = m_vec_handlerObject.begin(); it != m_vec_handlerObject.end(); ++it )
+	deltaMove /= 20;
+	OnArrowKeyDown(true,D3DXVECTOR3(0.f, 0.f, -deltaMove * g_key_sensitivity));
+}
+
+void MouseHandleManager::OnMouseMove(int x, int y)
+{
+	if( m_is_left_mouse_down )
 	{
-		if( *it == handler )
-		{
-			m_vec_handlerObject.erase(it);
-			return;
-		}
+		OnMouseMove_LButton(x, y);
 	}
 }
 
-void MouseHandeManager::OnKeyDown(WPARAM wParam)
+void MouseHandleManager::OnLeftMousePress(bool isDown, int x, int y)
 {
-	for( auto it = m_vec_handlerObject.begin(); it != m_vec_handlerObject.end(); ++it )
+	m_is_left_mouse_down = isDown;
+	SyncMousePos(x, y);
+}
+
+void MouseHandleManager::OnRightMousePress(bool isDown, int x, int y)
+{
+	SyncMousePos(x, y);
+}
+
+/************************************************************************/
+/* 分发消息                                                                     */
+/************************************************************************/
+
+void MouseHandleManager::OnArrowKeyDown(bool isDown, D3DXVECTOR3 direct)
+{
+	for( auto it = m_vec_objs.begin(); it != m_vec_objs.end(); ++it )
 	{
-		(*it)->OnKeyDown(wParam);
+		(*it)->OnArrowKeyDown(true, direct);
 	}
 }
 
-void MouseHandeManager::OnMouseMove(int x, int y)
+void MouseHandleManager::OnEscapeKeyDown(bool isDown)
+{
+	for( auto it = m_vec_objs.begin(); it != m_vec_objs.end(); ++it )
+	{
+		(*it)->OnEscapeKeyDown(true);
+	}
+}
+
+void MouseHandleManager::OnSpaceKeyDown(bool isDown)
+{
+	for( auto it = m_vec_objs.begin(); it != m_vec_objs.end(); ++it )
+	{
+		(*it)->OnSpaceKeyDown(true);
+	}
+}
+
+void MouseHandleManager::OnMouseMove_LButton(int x, int y)
 {
 	if( m_is_inited )
 	{
 		float t_floatx = float(x-m_last_mousepos_x) / g_screen_width * 2.0f * D3DX_PI;
 		float t_floaty = float(y-m_last_mousepos_y) / g_screen_height * 2.0f * D3DX_PI;
 
-		for( auto it = m_vec_handlerObject.begin(); it != m_vec_handlerObject.end(); ++it )
+		for( auto it = m_vec_objs.begin(); it != m_vec_objs.end(); ++it )
 		{
-			(*it)->OnKeyMove(t_floatx, t_floaty);
+			(*it)->OnMouseMove(t_floatx, t_floaty);
 		}
 	}
 	else
 	{
 		m_is_inited = true;
+		m_is_left_mouse_down = GetAsyncKeyState(VK_LBUTTON);
 	}
 
+	SyncMousePos(x, y);
+}
+
+void MouseHandleManager::SyncMousePos(int x, int y)
+{
 	m_last_mousepos_x = x;
 	m_last_mousepos_y = y;
 }

@@ -5,6 +5,8 @@ float4x4 ProjTransform;
 float4x4 ViewProjTransform;
 float4x4 WorldViewProjTransform;
 
+float CurrentTime;
+
 texture DiffuseTexture;
 
 sampler DiffuseTextureSampler = sampler_state
@@ -34,8 +36,10 @@ struct VS_OUTPUT
 VS_OUTPUT vs_main( VS_INPUT vs_in )
 {
 	VS_OUTPUT vs_out = (VS_OUTPUT)0;
-	float w = vs_in.position.w;
+	//vs_in.position += vs_in.normal * sin(g_fTime) * 3.5f;
+	//vs_in.position += mul(vs_in.normal, float4(0.5,0.5,0.5,0.0));
 	vs_out.position = mul(vs_in.position, ViewProjTransform);
+	//vs_out.position += mul(vs_in.normal, float4(0.5,0.5,0.5,0.0));
 	vs_out.color = float4(vs_in.tex, 0.0, 1.0);
 
 	vs_out.tex = vs_in.tex;

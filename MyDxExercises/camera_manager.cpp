@@ -26,23 +26,29 @@ void CameraManager::InitCamera()
 	Reset();
 }
 
-bool CameraManager::OnKeyDown(WPARAM wParam)
+bool CameraManager::OnSpaceKeyDown(bool isDown)
 {
-	switch( wParam )
+	if( isDown )
 	{
-	case VK_SPACE:
 		Reset();
 		return true;
-
-	default:
-		return false;
 	}
+	return false;
 }
 
-bool CameraManager::OnKeyMove(float x_screen, float y_screen)
+bool CameraManager::OnMouseMove(float x_screen, float y_screen)
 {
 	m_camera->RotateXYZ(x_screen, y_screen, 0);
 	return true;
+}
+
+bool CameraManager::OnArrowKeyDown(bool isDown, D3DXVECTOR3 direct)
+{
+	if(!isDown)
+		return false;
+
+	m_camera->MoveXYZ(direct.x, direct.y, direct.z);
+	return false;
 }
 
 void CameraManager::Reset()

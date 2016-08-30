@@ -80,6 +80,10 @@ const LPDIRECT3DVERTEXDECLARATION9 Effect::GetVertexDecl()
 	return m_arr_vertexDelcaration;
 }
 
+/************************************************************************/
+/* 封装效果框架的函数                                                                     */
+/************************************************************************/
+
 HRESULT Effect::SetMatrix(D3DXHANDLE handle, const D3DXMATRIX* mat )
 {
 	return m_effect->SetMatrix(handle, mat);
@@ -93,6 +97,11 @@ HRESULT Effect::SetTechnique(D3DXHANDLE handle)
 HRESULT Effect::SetTexture(D3DXHANDLE handle, LPDIRECT3DBASETEXTURE9 pTex)
 {
 	return m_effect->SetTexture(handle, pTex);
+}
+
+HRESULT Effect::SetFloat(D3DXHANDLE handle, float f)
+{
+	return m_effect->SetFloat(handle, f);
 }
 
 HRESULT Effect::Begin(UINT* pass, DWORD flags)

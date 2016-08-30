@@ -20,11 +20,13 @@
     <ClCompile Include="model_2d.cpp" />
     <ClCompile Include="mouse_handle_manager.cpp" />
     <ClCompile Include="effect.cpp" />
+    <ClCompile Include="TimerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="camera_manager.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="manager_register.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="model_3d.h" />
     <ClInclude Include="model_2d.h" />
@@ -32,6 +34,7 @@
     <ClInclude Include="model_manager.h" />
     <ClInclude Include="mouse_handle_manager.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="TimerManager.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>

@@ -63,10 +63,14 @@ void Camera::MoveZ(float dist) // 沿着z轴移动
 void Camera::MoveXYZ(float dist_x, float dist_y, float dist_z) // 沿着xyz移动
 {
 	D3DXMATRIX transMat;
-	D3DXMatrixTranslation(&transMat, dist_x, dist_y, dist_z);
-	D3DXMatrixMultiply(&m_mat_camera, &transMat, &m_mat_camera);
+	D3DXMatrixTranslation(&transMat, -dist_x, dist_y, dist_z); // 坐标系的缘故，x取反
+	D3DXMatrixMultiply(&m_mat_camera, &m_mat_camera, &transMat);
 
 	RefreshViewTransform();
+}
+void Camera::MoveXYZ(D3DXVECTOR3 deltaPos) // 沿着xyz移动
+{
+	MoveXYZ(deltaPos.x, deltaPos.y, deltaPos.z);
 }
 
 void Camera::MoveToPos(D3DXVECTOR3 pos) // 移动到新的位置

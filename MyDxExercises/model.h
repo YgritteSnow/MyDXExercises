@@ -3,10 +3,11 @@
 
 #include "model_3d.h"
 #include "log.h"
+#include "TimerManager.h"
 
 class Effect;
 
-class Model : public ModelInterface
+class Model : public ModelInterface, public TimerObject
 {
 public:
 	Model();
@@ -22,6 +23,9 @@ public:
 
 	// transform 相关
 	void Reset();
+
+	// 更新
+	virtual void Update(float deltaTime){};
 
 private:
 	void RenderByEffect() const;
